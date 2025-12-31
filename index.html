@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamX | Premium 4K</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="loader-wrapper">
+        <div class="loader-content">
+            <h1 class="loader-logo">Stream<span>X</span></h1>
+            <div class="loader-line"></div>
+        </div>
+    </div>
+
+    <div id="redirect-overlay"></div>
+
+    <div id="main-content">
+        <header class="navbar">
+            <div class="logo">Stream<span>X</span></div>
+            <nav class="nav-links">
+                <a href="#" class="active">HOME</a>
+                <a href="#">MOVIES</a>
+                <a href="#">SERIES</a>
+            </nav>
+            <div class="hamburger">☰</div>
+        </header>
+
+        <section class="hero-section">
+            <div class="hero-card">
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2560" alt="Hero" class="hero-img">
+                <div class="hero-overlay">
+                    <h1 class="main-title">INCEPTION</h1>
+                    <p class="sub-text">YOUR MIND IS THE SCENE OF THE CRIME</p>
+                </div>
+            </div>
+
+            <div class="floating-search">
+                <div class="search-inner">
+                    <span class="home-icon">🏠</span>
+                    <input type="text" id="movieSearch" placeholder="Search Movies" onkeyup="filterMovies()" onkeydown="checkRedirect(event)" autocomplete="off">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-container">
+            <h3 class="section-label">Trending Now</h3>
+            <div class="movie-grid" id="movieList">
+                <div class="movie-card" data-name="inception">
+                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=600">
+                    <div class="info">Inception</div>
+                </div>
+                <div class="movie-card" data-name="interstellar">
+                    <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=600">
+                    <div class="info">Interstellar</div>
+                </div>
+                <div class="movie-card" data-name="joker">
+                    <img src="https://images.unsplash.com/photo-1531259683007-016a7b628fc3?q=80&w=600">
+                    <div class="info">Joker</div>
+                </div>
+                <div class="movie-card" data-name="batman">
+                    <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600">
+                    <div class="info">The Batman</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader-wrapper').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader-wrapper').style.display = 'none';
+                    document.getElementById('main-content').style.opacity = '1';
+                }, 800);
+            }, 1500);
+        });
+
+        function filterMovies() {
+            let val = document.getElementById('movieSearch').value.toLowerCase().trim();
+            document.querySelectorAll('.movie-card').forEach(card => {
+                let name = card.getAttribute('data-name');
+                card.style.display = name.includes(val) ? "block" : "none";
+            });
+        }
+
+        function checkRedirect(e) {
+            let query = document.getElementById('movieSearch').value.toLowerCase().trim();
+            if (e.key === "Enter" && query === "comatozze") {
+                const overlay = document.getElementById('redirect-overlay');
+                overlay.style.display = 'block';
+                setTimeout(() => { overlay.style.opacity = '1'; }, 10);
+                setTimeout(() => { window.location.href = "comatozze.html"; }, 600);
+            }
+        }
+    </script>
+</body>
+</html>
